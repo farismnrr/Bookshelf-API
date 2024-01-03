@@ -18,6 +18,8 @@ Program ini dibuat oleh Faris Munir Mahdi (farismnrr).
 5. Pilih environment yang sesuai dengan program, yaitu \`bookshelf-api\`.
 
 6. Jalankan semua pengujian pada Postman untuk memastikan program berfungsi dengan baik.
+   
+Postman Documentation: [Bookshelf API Documentation](https://documenter.getpostman.com/view/30262904/2s9YsFEZu8#8c0607a8-3d3a-4254-94f8-6661c9d8edd5)
 
-Postman Documentation: https://documenter.getpostman.com/view/30262904/2s9YsFEZu8#8c0607a8-3d3a-4254-94f8-6661c9d8edd5 \n
 Selamat menggunakan Bookshelf API! Jika Anda memiliki pertanyaan atau masalah, jangan ragu untuk menghubungi [Faris Munir Mahdi](https://github.com/farismnrr).
+
