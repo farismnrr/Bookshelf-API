@@ -1,0 +1,2970 @@
+{
+	"info": {
+		"_postman_id": "d1663464-80f1-4a7c-8e4f-16f72005185f",
+		"name": "Bookshelf API Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30262904"
+	},
+	"item": [
+		{
+			"name": "[Mandatory] Add Book With Complete Data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code should be 201', () => {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should have correct property and value', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responseJson).to.haveOwnProperty('message');\r",
+							"    pm.expect(responseJson).to.haveOwnProperty('data');\r",
+							"\r",
+							"    pm.expect(responseJson.status).to.equals('success');\r",
+							"    pm.expect(responseJson.message).to.equals('Buku berhasil ditambahkan');\r",
+							"    pm.expect(responseJson.data).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body data should contain bookId', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const { data } = responseJson;\r",
+							"\r",
+							"    pm.expect(data).to.haveOwnProperty('bookId');\r",
+							"    pm.expect(data.bookId).to.not.equals('');\r",
+							"\r",
+							"    pm.environment.set('bookId', data.bookId);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{newName}}\",\r\n    \"year\": {{newYear}},\r\n    \"author\": \"{{newAuthor}}\",\r\n    \"summary\": \"{{newSummary}}\",\r\n    \"publisher\": \"{{newPublisher}}\",\r\n    \"pageCount\": {{newPageCount}},\r\n    \"readPage\": {{newReadPage}},\r\n    \"reading\": {{newReading}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/books"
+			},
+			"response": [
+				{
+					"name": "[Mandatory] Add Book With Complete Data",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{newName}}\",\r\n    \"year\": {{newYear}},\r\n    \"author\": \"{{newAuthor}}\",\r\n    \"summary\": \"{{newSummary}}\",\r\n    \"publisher\": \"{{newPublisher}}\",\r\n    \"pageCount\": {{newPageCount}},\r\n    \"readPage\": {{newReadPage}},\r\n    \"reading\": {{newReading}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/books"
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "6cb390a45d334bd160a35232f329f6f8;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:34:56 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "95"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Buku berhasil ditambahkan\",\n    \"data\": {\n        \"bookId\": \"nsoQJvsx_PO-BIOw\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "[Mandatory] Add Book With Finished Reading",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code should be 201', () => {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should have correct property and value', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responseJson).to.haveOwnProperty('message');\r",
+							"    pm.expect(responseJson).to.haveOwnProperty('data');\r",
+							"\r",
+							"    pm.expect(responseJson.status).to.equals('success');\r",
+							"    pm.expect(responseJson.message).to.equals('Buku berhasil ditambahkan');\r",
+							"    pm.expect(responseJson.data).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body data should contain bookId', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const { data } = responseJson;\r",
+							"\r",
+							"    pm.expect(data).to.haveOwnProperty('bookId');\r",
+							"    pm.expect(data.bookId).to.not.equals('');\r",
+							"\r",
+							"    pm.environment.set('bookIdWithFinishedReading', data.bookId);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{newName}}\",\r\n    \"year\": {{newYear}},\r\n    \"author\": \"{{newAuthor}}\",\r\n    \"summary\": \"{{newSummary}}\",\r\n    \"publisher\": \"{{newPublisher}}\",\r\n    \"pageCount\": 100,\r\n    \"readPage\": 100,\r\n    \"reading\": {{newReading}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/books"
+			},
+			"response": [
+				{
+					"name": "[Mandatory] Add Book With Finished Reading",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{newName}}\",\r\n    \"year\": {{newYear}},\r\n    \"author\": \"{{newAuthor}}\",\r\n    \"summary\": \"{{newSummary}}\",\r\n    \"publisher\": \"{{newPublisher}}\",\r\n    \"pageCount\": 100,\r\n    \"readPage\": 100,\r\n    \"reading\": {{newReading}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/books"
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "def0f4a7c2064fcc46cc8e28416cd1b9;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:35:06 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "95"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Buku berhasil ditambahkan\",\n    \"data\": {\n        \"bookId\": \"r86ziI8YEzQhAFse\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "[Mandatory] Add Book Without Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code should be 400', () => {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should have correct property and value', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responseJson).to.haveOwnProperty('message');\r",
+							"    pm.expect(responseJson).to.not.haveOwnProperty('data');\r",
+							"\r",
+							"    pm.expect(responseJson.status).to.equals('fail');\r",
+							"    pm.expect(responseJson.message).to.equals('Gagal menambahkan buku. Mohon isi nama buku');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"year\": {{newYear}},\r\n    \"author\": \"{{newAuthor}}\",\r\n    \"summary\": \"{{newSummary}}\",\r\n    \"publisher\": \"{{newPublisher}}\",\r\n    \"pageCount\": {{newPageCount}},\r\n    \"readPage\": {{newReadPage}},\r\n    \"reading\": {{newReading}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/books"
+			},
+			"response": [
+				{
+					"name": "[Mandatory] Add Book Without Name",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"year\": {{newYear}},\r\n    \"author\": \"{{newAuthor}}\",\r\n    \"summary\": \"{{newSummary}}\",\r\n    \"publisher\": \"{{newPublisher}}\",\r\n    \"pageCount\": {{newPageCount}},\r\n    \"readPage\": {{newReadPage}},\r\n    \"reading\": {{newReading}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/books"
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "09d53d618c11d2a4894d756e76060c53"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:35:13 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "73"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"fail\",\n    \"message\": \"Gagal menambahkan buku. Mohon isi nama buku\"\n}"
+				}
+			]
+		},
+		{
+			"name": "[Mandatory] Add Book with Page Read More Than Page Count",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code should be 400', () => {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should have correct property and value', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responseJson).to.haveOwnProperty('message');\r",
+							"    pm.expect(responseJson).to.not.haveOwnProperty('data');\r",
+							"\r",
+							"    pm.expect(responseJson.status).to.equals('fail');\r",
+							"    pm.expect(responseJson.message).to.equals('Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{newName}}\",\r\n    \"year\": {{newYear}},\r\n    \"author\": \"{{newAuthor}}\",\r\n    \"summary\": \"{{newSummary}}\",\r\n    \"publisher\": \"{{newPublisher}}\",\r\n    \"pageCount\": 80,\r\n    \"readPage\": 90,\r\n    \"reading\": {{newReading}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/books"
+			},
+			"response": [
+				{
+					"name": "[Mandatory] Add Book with Page Read More Than Page Count",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{newName}}\",\r\n    \"year\": {{newYear}},\r\n    \"author\": \"{{newAuthor}}\",\r\n    \"summary\": \"{{newSummary}}\",\r\n    \"publisher\": \"{{newPublisher}}\",\r\n    \"pageCount\": 80,\r\n    \"readPage\": 90,\r\n    \"reading\": {{newReading}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/books"
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "999e680a4e4c6e29ea7eba91dd4f4d2f;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:35:38 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "101"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"fail\",\n    \"message\": \"Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount\"\n}"
+				}
+			]
+		},
+		{
+			"name": "[Mandatory] Get All Books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code should be 200', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body object should have correct property and value', () => {\r",
+							"    const responsJson = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responsJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responsJson).to.haveOwnProperty('data');\r",
+							"\r",
+							"    pm.expect(responsJson.status).to.equals('success');\r",
+							"    pm.expect(responsJson.data).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body data object should have a array books and contains two items', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const { data } = responseJson;\r",
+							"\r",
+							"    pm.expect(data).to.haveOwnProperty('books');\r",
+							"    pm.expect(data.books).to.be.an('array');\r",
+							"    pm.expect(data.books).to.lengthOf(2);\r",
+							"});\r",
+							"\r",
+							"pm.test('the books should have contains only id, name, and publisher property', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const { data: { books } } = responseJson;\r",
+							"\r",
+							"    books.forEach((book) => {\r",
+							"        pm.expect(Object.keys(book)).to.lengthOf(3);\r",
+							"        pm.expect(book).to.haveOwnProperty('id');\r",
+							"        pm.expect(book).to.haveOwnProperty('name');\r",
+							"        pm.expect(book).to.haveOwnProperty('publisher');\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/books"
+			},
+			"response": [
+				{
+					"name": "[Mandatory] Get All Books",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/books"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "09849f765e51b47300664eb5ea111685;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:35:51 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"books\": [\n            {\n                \"id\": \"gde4AJNEWuuKCx0T\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"ysLI2Gk7vrxToQ-N\",\n                \"name\": \"Buku A Revisi\",\n                \"publisher\": \"Dicoding\"\n            },\n            {\n                \"id\": \"jVzvj2lA_eUyJ9al\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"GGIeH91etMYTKqJt\",\n                \"name\": \"Buku A Revisi\",\n                \"publisher\": \"Dicoding\"\n            },\n            {\n                \"id\": \"eTibBNauQa0_e6HD\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"xQEp6QhcQduhEdyJ\",\n                \"name\": \"Buku A Revisi\",\n                \"publisher\": \"Dicoding\"\n            },\n            {\n                \"id\": \"zkPHtJDrWtymm3SE\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"WwhruIE262U_BDEy\",\n                \"name\": \"Buku A Revisi\",\n                \"publisher\": \"Dicoding\"\n            },\n            {\n                \"id\": \"X4LFS14YebjeYI6t\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"19P8DsBVJQgU3_qL\",\n                \"name\": \"Buku A Revisi\",\n                \"publisher\": \"Dicoding\"\n            },\n            {\n                \"id\": \"p0-J2UHMMihPK2Pc\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"nsoQJvsx_PO-BIOw\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"r86ziI8YEzQhAFse\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "[Mandatory] Get Detail Books With Correct Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('response code should be 200', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should an object', () =>  {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body object should contain correct property and value', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responseJson).to.haveOwnProperty('data');\r",
+							"\r",
+							"    pm.expect(responseJson.status).to.equals('success');\r",
+							"    pm.expect(responseJson.data).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body data object should contain book object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const { data } = responseJson;\r",
+							"\r",
+							"    pm.expect(data).to.haveOwnProperty('book');\r",
+							"    pm.expect(data.book).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('book object should contain correct property and value', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const { data: { book } } = responseJson;\r",
+							"\r",
+							"    pm.expect(book).to.haveOwnProperty('id');\r",
+							"    pm.expect(book).to.haveOwnProperty('name');\r",
+							"    pm.expect(book).to.haveOwnProperty('year');\r",
+							"    pm.expect(book).to.haveOwnProperty('author');\r",
+							"    pm.expect(book).to.haveOwnProperty('summary');\r",
+							"    pm.expect(book).to.haveOwnProperty('publisher');\r",
+							"    pm.expect(book).to.haveOwnProperty('pageCount');\r",
+							"    pm.expect(book).to.haveOwnProperty('readPage');\r",
+							"    pm.expect(book).to.haveOwnProperty('finished');\r",
+							"    pm.expect(book).to.haveOwnProperty('reading');\r",
+							"    pm.expect(book).to.haveOwnProperty('insertedAt');\r",
+							"    pm.expect(book).to.haveOwnProperty('updatedAt');\r",
+							"\r",
+							"    pm.expect(book.id).to.equals(pm.environment.get('bookId'));\r",
+							"    pm.expect(book.name).to.equals(pm.environment.get('newName'));\r",
+							"    pm.expect(book.year).to.equals(Number(pm.environment.get('newYear')));\r",
+							"    pm.expect(book.author).to.equals(pm.environment.get('newAuthor'));\r",
+							"    pm.expect(book.summary).to.equals(pm.environment.get('newSummary'));\r",
+							"    pm.expect(book.publisher).to.equals(pm.environment.get('newPublisher'));\r",
+							"    pm.expect(book.pageCount).to.equals(Number(pm.environment.get('newPageCount')));\r",
+							"    pm.expect(book.readPage).to.equals(Number(pm.environment.get('newReadPage')));\r",
+							"    pm.expect(book.finished).to.equals(pm.environment.get('newPageCount') === pm.environment.get('newReadPage'));\r",
+							"    pm.expect(book.reading).to.equals(pm.environment.get('newReading') == 'true');\r",
+							"    pm.expect(book.insertedAt).to.not.equals('');\r",
+							"    pm.expect(book.updatedAt).to.not.equals('');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/books/{{bookId}}"
+			},
+			"response": [
+				{
+					"name": "[Mandatory] Get Detail Books With Correct Id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/books/{{bookId}}"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "cd06d5d30f9fd7bf1898e896217fbf38"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:36:00 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"book\": {\n            \"id\": \"nsoQJvsx_PO-BIOw\",\n            \"name\": \"Buku A\",\n            \"year\": 2010,\n            \"author\": \"John Doe\",\n            \"summary\": \"Lorem ipsum dolor sit amet\",\n            \"publisher\": \"Dicoding Indonesia\",\n            \"pageCount\": 100,\n            \"readPage\": 25,\n            \"finished\": false,\n            \"reading\": false,\n            \"insertedAt\": \"2024-01-03T10:34:56.136Z\",\n            \"updatedAt\": \"2024-01-03T10:34:56.136Z\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "[Mandatory] Get Detail Finished Book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('response code should be 200', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should an object', () =>  {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body object should contain correct property and value', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responseJson).to.haveOwnProperty('data');\r",
+							"\r",
+							"    pm.expect(responseJson.status).to.equals('success');\r",
+							"    pm.expect(responseJson.data).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body data object should contain book object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const { data } = responseJson;\r",
+							"\r",
+							"    pm.expect(data).to.haveOwnProperty('book');\r",
+							"    pm.expect(data.book).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('book object should contain correct property and value', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const { data: { book } } = responseJson;\r",
+							"\r",
+							"    pm.expect(book).to.haveOwnProperty('id');\r",
+							"    pm.expect(book).to.haveOwnProperty('name');\r",
+							"    pm.expect(book).to.haveOwnProperty('year');\r",
+							"    pm.expect(book).to.haveOwnProperty('author');\r",
+							"    pm.expect(book).to.haveOwnProperty('summary');\r",
+							"    pm.expect(book).to.haveOwnProperty('publisher');\r",
+							"    pm.expect(book).to.haveOwnProperty('pageCount');\r",
+							"    pm.expect(book).to.haveOwnProperty('readPage');\r",
+							"    pm.expect(book).to.haveOwnProperty('finished');\r",
+							"    pm.expect(book).to.haveOwnProperty('reading');\r",
+							"    pm.expect(book).to.haveOwnProperty('insertedAt');\r",
+							"    pm.expect(book).to.haveOwnProperty('updatedAt');\r",
+							"\r",
+							"    pm.expect(book.id).to.equals(pm.environment.get('bookIdWithFinishedReading'));\r",
+							"    pm.expect(book.name).to.equals(pm.environment.get('newName'));\r",
+							"    pm.expect(book.year).to.equals(Number(pm.environment.get('newYear')));\r",
+							"    pm.expect(book.author).to.equals(pm.environment.get('newAuthor'));\r",
+							"    pm.expect(book.summary).to.equals(pm.environment.get('newSummary'));\r",
+							"    pm.expect(book.publisher).to.equals(pm.environment.get('newPublisher'));\r",
+							"    pm.expect(book.pageCount).to.equals(100);\r",
+							"    pm.expect(book.readPage).to.equals(100);\r",
+							"    pm.expect(book.finished).to.equals(true);\r",
+							"    pm.expect(book.reading).to.equals(pm.environment.get('newReading') == 'true');\r",
+							"    pm.expect(book.insertedAt).to.not.equals('');\r",
+							"    pm.expect(book.updatedAt).to.not.equals('');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/books/{{bookIdWithFinishedReading}}"
+			},
+			"response": [
+				{
+					"name": "[Mandatory] Get Detail Finished Book",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/books/{{bookIdWithFinishedReading}}"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "f29bbda253f22c46d532af4788140796;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:36:07 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"book\": {\n            \"id\": \"r86ziI8YEzQhAFse\",\n            \"name\": \"Buku A\",\n            \"year\": 2010,\n            \"author\": \"John Doe\",\n            \"summary\": \"Lorem ipsum dolor sit amet\",\n            \"publisher\": \"Dicoding Indonesia\",\n            \"pageCount\": 100,\n            \"readPage\": 100,\n            \"finished\": true,\n            \"reading\": false,\n            \"insertedAt\": \"2024-01-03T10:35:06.190Z\",\n            \"updatedAt\": \"2024-01-03T10:35:06.190Z\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "[Mandatory] Get Detail Books With Invalid Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('response code should be 404', () => {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should an object', () =>  {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body object should contain correct property and value', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responseJson).to.haveOwnProperty('message');\r",
+							"\r",
+							"    pm.expect(responseJson.status).to.equals('fail');\r",
+							"    pm.expect(responseJson.message).to.equals('Buku tidak ditemukan');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/books/xxxxx"
+			},
+			"response": [
+				{
+					"name": "[Mandatory] Get Detail Books With Invalid Id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/books/xxxxx"
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "7bfb17a125638f4e3894cd01f80ee1bc"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:36:13 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"fail\",\n    \"message\": \"Buku tidak ditemukan\"\n}"
+				}
+			]
+		},
+		{
+			"name": "[Mandatory] Update Book With Complete Data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code should be 200', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should have correct property and value', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responseJson).to.haveOwnProperty('message');\r",
+							"\r",
+							"    pm.expect(responseJson.status).to.equals('success');\r",
+							"    pm.expect(responseJson.message).to.equals('Buku berhasil diperbarui');\r",
+							"});\r",
+							"\r",
+							"pm.test('when get detail books', () => {\r",
+							"    pm.sendRequest(`http://localhost:${pm.environment.get('port')}/books/${pm.environment.get('bookId')}`, (error, response) => {\r",
+							"       const responseJson = response.json();\r",
+							"       const { data: { book} } = responseJson;\r",
+							"\r",
+							"       pm.test('book object should contain updated values', () => {\r",
+							"            pm.expect(book).to.haveOwnProperty('id');\r",
+							"            pm.expect(book).to.haveOwnProperty('name');\r",
+							"            pm.expect(book).to.haveOwnProperty('year');\r",
+							"            pm.expect(book).to.haveOwnProperty('author');\r",
+							"            pm.expect(book).to.haveOwnProperty('summary');\r",
+							"            pm.expect(book).to.haveOwnProperty('publisher');\r",
+							"            pm.expect(book).to.haveOwnProperty('pageCount');\r",
+							"            pm.expect(book).to.haveOwnProperty('readPage');\r",
+							"            pm.expect(book).to.haveOwnProperty('finished');\r",
+							"            pm.expect(book).to.haveOwnProperty('reading');\r",
+							"            pm.expect(book).to.haveOwnProperty('insertedAt');\r",
+							"            pm.expect(book).to.haveOwnProperty('updatedAt');\r",
+							"            \r",
+							"            pm.expect(book.id).to.equals(pm.environment.get('bookId'));\r",
+							"            pm.expect(book.name).to.equals(pm.environment.get('updateName'));\r",
+							"            pm.expect(book.year).to.equals(Number(pm.environment.get('updateYear')));\r",
+							"            pm.expect(book.author).to.equals(pm.environment.get('updateAuthor'));\r",
+							"            pm.expect(book.summary).to.equals(pm.environment.get('updateSummary'));\r",
+							"            pm.expect(book.publisher).to.equals(pm.environment.get('updatePublisher'));\r",
+							"            pm.expect(book.pageCount).to.equals(Number(pm.environment.get('updatePageCount')));\r",
+							"            pm.expect(book.readPage).to.equals(Number(pm.environment.get('updateReadPage')));\r",
+							"            pm.expect(book.finished).to.equals(pm.environment.get('updateReadPage') === pm.environment.get('updatePageCount'));\r",
+							"            pm.expect(book.reading).to.equals(pm.environment.get('updateReading') == 'true');\r",
+							"            pm.expect(book.insertedAt).to.not.equals('');\r",
+							"            pm.expect(book.updatedAt).to.not.equals('');\r",
+							"       }); \r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{updateName}}\",\r\n    \"year\": {{updateYear}},\r\n    \"author\": \"{{updateAuthor}}\",\r\n    \"summary\": \"{{updateSummary}}\",\r\n    \"publisher\": \"{{updatePublisher}}\",\r\n    \"pageCount\": {{updatePageCount}},\r\n    \"readPage\": {{updateReadPage}},\r\n    \"reading\": {{updateReading}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/books/{{bookId}}"
+			},
+			"response": [
+				{
+					"name": "[Mandatory] Update Book With Complete Data",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{updateName}}\",\r\n    \"year\": {{updateYear}},\r\n    \"author\": \"{{updateAuthor}}\",\r\n    \"summary\": \"{{updateSummary}}\",\r\n    \"publisher\": \"{{updatePublisher}}\",\r\n    \"pageCount\": {{updatePageCount}},\r\n    \"readPage\": {{updateReadPage}},\r\n    \"reading\": {{updateReading}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/books/{{bookId}}"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "69000bd2bdd4fbddf48a15fb9e278117;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:36:23 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Buku berhasil diperbarui\"\n}"
+				}
+			]
+		},
+		{
+			"name": "[Mandatory] Update Book Without Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code should be 400', () => {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should have correct property and value', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responseJson).to.haveOwnProperty('message');\r",
+							"    pm.expect(responseJson).to.not.haveOwnProperty('data')\r",
+							"\r",
+							"    pm.expect(responseJson.status).to.equals('fail');\r",
+							"    pm.expect(responseJson.message).to.equals('Gagal memperbarui buku. Mohon isi nama buku');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"year\": {{updateYear}},\r\n    \"author\": \"{{updateAuthor}}\",\r\n    \"summary\": \"{{updateSummary}}\",\r\n    \"publisher\": \"{{updatePublisher}}\",\r\n    \"pageCount\": {{updatePageCount}},\r\n    \"readPage\": {{updateReadPage}},\r\n    \"reading\": {{updateReading}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/books/{{bookId}}"
+			},
+			"response": [
+				{
+					"name": "[Mandatory] Update Book Without Name",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"year\": {{updateYear}},\r\n    \"author\": \"{{updateAuthor}}\",\r\n    \"summary\": \"{{updateSummary}}\",\r\n    \"publisher\": \"{{updatePublisher}}\",\r\n    \"pageCount\": {{updatePageCount}},\r\n    \"readPage\": {{updateReadPage}},\r\n    \"reading\": {{updateReading}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/books/{{bookId}}"
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "fb8c63e2b32fb48bfd1fd11f842a4b54"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:36:31 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "73"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"fail\",\n    \"message\": \"Gagal memperbarui buku. Mohon isi nama buku\"\n}"
+				}
+			]
+		},
+		{
+			"name": "[Mandatory] Update Book With Page Read More Than Page Count",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code should be 400', () => {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should have correct property and value', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responseJson).to.haveOwnProperty('message');\r",
+							"    pm.expect(responseJson).to.not.haveOwnProperty('data');\r",
+							"\r",
+							"    pm.expect(responseJson.status).to.equals('fail');\r",
+							"    pm.expect(responseJson.message).to.equals('Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{updateName}}\",\r\n    \"year\": {{updateYear}},\r\n    \"author\": \"{{updateAuthor}}\",\r\n    \"summary\": \"{{updateSummary}}\",\r\n    \"publisher\": \"{{updatePublisher}}\",\r\n    \"pageCount\": 80,\r\n    \"readPage\": 90,\r\n    \"reading\": {{updateReading}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/books/{{bookId}}"
+			},
+			"response": [
+				{
+					"name": "[Mandatory] Update Book With Page Read More Than Page Count",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{updateName}}\",\r\n    \"year\": {{updateYear}},\r\n    \"author\": \"{{updateAuthor}}\",\r\n    \"summary\": \"{{updateSummary}}\",\r\n    \"publisher\": \"{{updatePublisher}}\",\r\n    \"pageCount\": 80,\r\n    \"readPage\": 90,\r\n    \"reading\": {{updateReading}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/books/{{bookId}}"
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "ffcac8c3b6b749dd05f0a95f31a3197c;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:36:40 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "101"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"fail\",\n    \"message\": \"Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount\"\n}"
+				}
+			]
+		},
+		{
+			"name": "[Mandatory] Update Book with Invalid Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code should be 404', () => {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should have correct property and value', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responseJson).to.haveOwnProperty('message');\r",
+							"\r",
+							"    pm.expect(responseJson.status).to.equals('fail');\r",
+							"    pm.expect(responseJson.message).to.equals('Gagal memperbarui buku. Id tidak ditemukan');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{updateName}}\",\r\n    \"year\": {{updateYear}},\r\n    \"author\": \"{{updateAuthor}}\",\r\n    \"summary\": \"{{updateSummary}}\",\r\n    \"publisher\": \"{{updatePublisher}}\",\r\n    \"pageCount\": {{updatePageCount}},\r\n    \"readPage\": {{updateReadPage}},\r\n    \"reading\": {{updateReading}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/books/xxxxx"
+			},
+			"response": [
+				{
+					"name": "[Mandatory] Update Book with Invalid Id",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{updateName}}\",\r\n    \"year\": {{updateYear}},\r\n    \"author\": \"{{updateAuthor}}\",\r\n    \"summary\": \"{{updateSummary}}\",\r\n    \"publisher\": \"{{updatePublisher}}\",\r\n    \"pageCount\": {{updatePageCount}},\r\n    \"readPage\": {{updateReadPage}},\r\n    \"reading\": {{updateReading}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/books/xxxxx"
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "86980efa832ebc5f97a360958a40973e"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:36:47 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"fail\",\n    \"message\": \"Gagal memperbarui buku. Id tidak ditemukan\"\n}"
+				}
+			]
+		},
+		{
+			"name": "[Mandatory] Delete Book with Correct Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code should be 200', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should have correct property and value', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responseJson).to.haveOwnProperty('message');\r",
+							"\r",
+							"    pm.expect(responseJson.status).to.equals('success');\r",
+							"    pm.expect(responseJson.message).to.equals('Buku berhasil dihapus');\r",
+							"});\r",
+							"\r",
+							"pm.test('when get detail books', () => {\r",
+							"    pm.sendRequest(`http://localhost:${pm.environment.get('port')}/books/${pm.environment.get('bookId')}`, (error, response) => {\r",
+							"       pm.test('The book should be not found', () => {\r",
+							"          pm.expect(response.code).to.equals(404);\r",
+							"       }); \r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{url}}/books/{{bookId}}"
+			},
+			"response": [
+				{
+					"name": "[Mandatory] Delete Book with Correct Id",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{url}}/books/{{bookId}}"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "7ce5802b5f517c6b616a6e6ffaf7f0b9;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:36:54 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Buku berhasil dihapus\"\n}"
+				}
+			]
+		},
+		{
+			"name": "[Mandatory] Delete Finished book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code should be 200', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should have correct property and value', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responseJson).to.haveOwnProperty('message');\r",
+							"\r",
+							"    pm.expect(responseJson.status).to.equals('success');\r",
+							"    pm.expect(responseJson.message).to.equals('Buku berhasil dihapus');\r",
+							"});\r",
+							"\r",
+							"pm.test('when get detail books', () => {\r",
+							"    pm.sendRequest(`http://localhost:${pm.environment.get('port')}/books/${pm.environment.get('bookIdWithFinishedReading')}`, (error, response) => {\r",
+							"       pm.test('The book should be not found', () => {\r",
+							"          pm.expect(response.code).to.equals(404);\r",
+							"       }); \r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{url}}/books/{{bookIdWithFinishedReading}}"
+			},
+			"response": [
+				{
+					"name": "[Mandatory] Delete Finished book",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{url}}/books/{{bookIdWithFinishedReading}}"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "58b429946757ab8f181eecd04dc66ac3"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:37:50 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Buku berhasil dihapus\"\n}"
+				}
+			]
+		},
+		{
+			"name": "[Mandatory] Delete Book with Invalid Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code should be 404', () => {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should have correct property and value', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responseJson).to.haveOwnProperty('message');\r",
+							"\r",
+							"    pm.expect(responseJson.status).to.equals('fail');\r",
+							"    pm.expect(responseJson.message).to.equals('Buku gagal dihapus. Id tidak ditemukan');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{url}}/books/xxxxx"
+			},
+			"response": [
+				{
+					"name": "[Mandatory] Delete Book with Invalid Id",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{url}}/books/xxxxx"
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "dfe2bf44a2ef28ea33a2871b7a3bb4ec;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:37:56 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"fail\",\n    \"message\": \"Buku gagal dihapus. Id tidak ditemukan\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Add Reading and Finished Book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{newName}}\",\r\n    \"year\": {{newYear}},\r\n    \"author\": \"{{newAuthor}}\",\r\n    \"summary\": \"{{newSummary}}\",\r\n    \"publisher\": \"{{newPublisher}}\",\r\n    \"pageCount\": 100,\r\n    \"readPage\": 100,\r\n    \"reading\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/books"
+			},
+			"response": [
+				{
+					"name": "Add Reading and Finished Book",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{newName}}\",\r\n    \"year\": {{newYear}},\r\n    \"author\": \"{{newAuthor}}\",\r\n    \"summary\": \"{{newSummary}}\",\r\n    \"publisher\": \"{{newPublisher}}\",\r\n    \"pageCount\": 100,\r\n    \"readPage\": 100,\r\n    \"reading\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/books"
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "6702513d52827412c4b981e8d7eac507"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:38:06 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "95"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Buku berhasil ditambahkan\",\n    \"data\": {\n        \"bookId\": \"Pa9V-F1QmpRz6Qe5\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Add Reading and Unfinished Book with \"Dicoding\" Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Kelas Dicoding\",\r\n    \"year\": {{newYear}},\r\n    \"author\": \"{{newAuthor}}\",\r\n    \"summary\": \"{{newSummary}}\",\r\n    \"publisher\": \"{{newPublisher}}\",\r\n    \"pageCount\": 100,\r\n    \"readPage\": 99,\r\n    \"reading\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/books"
+			},
+			"response": [
+				{
+					"name": "Add Reading and Unfinished Book with \"Dicoding\" Name",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Kelas Dicoding\",\r\n    \"year\": {{newYear}},\r\n    \"author\": \"{{newAuthor}}\",\r\n    \"summary\": \"{{newSummary}}\",\r\n    \"publisher\": \"{{newPublisher}}\",\r\n    \"pageCount\": 100,\r\n    \"readPage\": 99,\r\n    \"reading\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/books"
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "062bb41cd4a0eabf6015dcdcbaf4b31a"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:38:18 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "95"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Buku berhasil ditambahkan\",\n    \"data\": {\n        \"bookId\": \"3sGmZUnymjv7s5nS\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Add Unreading Books and Unfinished Book \"Dicoding\" Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"dicoding Jobs\",\r\n    \"year\": {{newYear}},\r\n    \"author\": \"{{newAuthor}}\",\r\n    \"summary\": \"{{newSummary}}\",\r\n    \"publisher\": \"{{newPublisher}}\",\r\n    \"pageCount\": 100,\r\n    \"readPage\": 0,\r\n    \"reading\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/books"
+			},
+			"response": [
+				{
+					"name": "Add Unreading Books and Unfinished Book \"Dicoding\" Name",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"dicoding Jobs\",\r\n    \"year\": {{newYear}},\r\n    \"author\": \"{{newAuthor}}\",\r\n    \"summary\": \"{{newSummary}}\",\r\n    \"publisher\": \"{{newPublisher}}\",\r\n    \"pageCount\": 100,\r\n    \"readPage\": 0,\r\n    \"reading\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/books"
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "7a49ee409e21187699dc78aa39a9f140;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:38:24 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "95"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Buku berhasil ditambahkan\",\n    \"data\": {\n        \"bookId\": \"foB0HgRzftucO7dc\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Add Unreading Books and Unfinished Book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{newName}}\",\r\n    \"year\": {{newYear}},\r\n    \"author\": \"{{newAuthor}}\",\r\n    \"summary\": \"{{newSummary}}\",\r\n    \"publisher\": \"{{newPublisher}}\",\r\n    \"pageCount\": 100,\r\n    \"readPage\": 0,\r\n    \"reading\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/books"
+			},
+			"response": [
+				{
+					"name": "Add Unreading Books and Unfinished Book",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{newName}}\",\r\n    \"year\": {{newYear}},\r\n    \"author\": \"{{newAuthor}}\",\r\n    \"summary\": \"{{newSummary}}\",\r\n    \"publisher\": \"{{newPublisher}}\",\r\n    \"pageCount\": 100,\r\n    \"readPage\": 0,\r\n    \"reading\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/books"
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "3e9634c02b07d32190055b23d5beae59"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:38:31 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "95"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Buku berhasil ditambahkan\",\n    \"data\": {\n        \"bookId\": \"LSSUmkgZmHyrCm9J\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "[Optional] Get All Reading Books",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code should be 200', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body object should have correct property and value', () => {\r",
+							"    const responsJson = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responsJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responsJson).to.haveOwnProperty('data');\r",
+							"\r",
+							"    pm.expect(responsJson.status).to.equals('success');\r",
+							"    pm.expect(responsJson.data).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body data object should have a array books and contains 2 items', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const { data } = responseJson;\r",
+							"\r",
+							"    pm.expect(data).to.haveOwnProperty('books');\r",
+							"    pm.expect(data.books).to.be.an('array');\r",
+							"    pm.expect(data.books).to.lengthOf(2);\r",
+							"});\r",
+							"\r",
+							"pm.test('the books should have contains only id, name, and publisher property', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const { data: { books } } = responseJson;\r",
+							"\r",
+							"    books.forEach((book) => {\r",
+							"        pm.expect(Object.keys(book)).to.lengthOf(3);\r",
+							"        pm.expect(book).to.haveOwnProperty('id');\r",
+							"        pm.expect(book).to.haveOwnProperty('name');\r",
+							"        pm.expect(book).to.haveOwnProperty('publisher');\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/books?reading=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books"
+					],
+					"query": [
+						{
+							"key": "reading",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "[Optional] Get All Reading Books",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/books?reading=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"books"
+							],
+							"query": [
+								{
+									"key": "reading",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "e0c231aea90e640efffcf549f9925c10;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:38:37 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"books\": [\n            {\n                \"id\": \"Pa9V-F1QmpRz6Qe5\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"F2JghaIN1F2QbbwP\",\n                \"name\": \"Kelas Dicoding\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"3sGmZUnymjv7s5nS\",\n                \"name\": \"Kelas Dicoding\",\n                \"publisher\": \"Dicoding Indonesia\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "[Optional] Get All Unreading Books",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code should be 200', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body object should have correct property and value', () => {\r",
+							"    const responsJson = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responsJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responsJson).to.haveOwnProperty('data');\r",
+							"\r",
+							"    pm.expect(responsJson.status).to.equals('success');\r",
+							"    pm.expect(responsJson.data).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body data object should have a array books and contains at 2 items', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const { data } = responseJson;\r",
+							"\r",
+							"    pm.expect(data).to.haveOwnProperty('books');\r",
+							"    pm.expect(data.books).to.be.an('array');\r",
+							"    pm.expect(data.books).to.lengthOf(2);\r",
+							"});\r",
+							"\r",
+							"pm.test('the books should have contains only id, name, and publisher property', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const { data: { books } } = responseJson;\r",
+							"\r",
+							"    books.forEach((book) => {\r",
+							"        pm.expect(Object.keys(book)).to.lengthOf(3);\r",
+							"        pm.expect(book).to.haveOwnProperty('id');\r",
+							"        pm.expect(book).to.haveOwnProperty('name');\r",
+							"        pm.expect(book).to.haveOwnProperty('publisher');\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/books?reading=0",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books"
+					],
+					"query": [
+						{
+							"key": "reading",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "[Optional] Get All Unreading Books",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/books?reading=0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"books"
+							],
+							"query": [
+								{
+									"key": "reading",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "cd40401cb07c2a3569eef3a38c16d3c3"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:38:42 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"books\": [\n            {\n                \"id\": \"gde4AJNEWuuKCx0T\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"ysLI2Gk7vrxToQ-N\",\n                \"name\": \"Buku A Revisi\",\n                \"publisher\": \"Dicoding\"\n            },\n            {\n                \"id\": \"jVzvj2lA_eUyJ9al\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"GGIeH91etMYTKqJt\",\n                \"name\": \"Buku A Revisi\",\n                \"publisher\": \"Dicoding\"\n            },\n            {\n                \"id\": \"eTibBNauQa0_e6HD\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"xQEp6QhcQduhEdyJ\",\n                \"name\": \"Buku A Revisi\",\n                \"publisher\": \"Dicoding\"\n            },\n            {\n                \"id\": \"zkPHtJDrWtymm3SE\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"WwhruIE262U_BDEy\",\n                \"name\": \"Buku A Revisi\",\n                \"publisher\": \"Dicoding\"\n            },\n            {\n                \"id\": \"X4LFS14YebjeYI6t\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"19P8DsBVJQgU3_qL\",\n                \"name\": \"Buku A Revisi\",\n                \"publisher\": \"Dicoding\"\n            },\n            {\n                \"id\": \"p0-J2UHMMihPK2Pc\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"foB0HgRzftucO7dc\",\n                \"name\": \"dicoding Jobs\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"LSSUmkgZmHyrCm9J\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "[Optional] Get All Finished Books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code should be 200', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body object should have correct property and value', () => {\r",
+							"    const responsJson = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responsJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responsJson).to.haveOwnProperty('data');\r",
+							"\r",
+							"    pm.expect(responsJson.status).to.equals('success');\r",
+							"    pm.expect(responsJson.data).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body data object should have a array books and contains 1 items', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const { data } = responseJson;\r",
+							"\r",
+							"    pm.expect(data).to.haveOwnProperty('books');\r",
+							"    pm.expect(data.books).to.be.an('array');\r",
+							"    pm.expect(data.books).to.lengthOf(1);\r",
+							"});\r",
+							"\r",
+							"pm.test('the books should have contains only id, name, and publisher property', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const { data: { books } } = responseJson;\r",
+							"\r",
+							"    books.forEach((book) => {\r",
+							"        pm.expect(Object.keys(book)).to.lengthOf(3);\r",
+							"        pm.expect(book).to.haveOwnProperty('id');\r",
+							"        pm.expect(book).to.haveOwnProperty('name');\r",
+							"        pm.expect(book).to.haveOwnProperty('publisher');\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/books?finished=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books"
+					],
+					"query": [
+						{
+							"key": "finished",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "[Optional] Get All Finished Books",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/books?finished=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"books"
+							],
+							"query": [
+								{
+									"key": "finished",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "dd1c2e4b922aa084a73b77091ef4d6de;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:38:47 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"books\": [\n            {\n                \"id\": \"gde4AJNEWuuKCx0T\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"jVzvj2lA_eUyJ9al\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"eTibBNauQa0_e6HD\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"zkPHtJDrWtymm3SE\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"X4LFS14YebjeYI6t\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"p0-J2UHMMihPK2Pc\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"Pa9V-F1QmpRz6Qe5\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "[Optional] Get All Unfinished Books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code should be 200', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body object should have correct property and value', () => {\r",
+							"    const responsJson = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responsJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responsJson).to.haveOwnProperty('data');\r",
+							"\r",
+							"    pm.expect(responsJson.status).to.equals('success');\r",
+							"    pm.expect(responsJson.data).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body data object should have a array books and contains 3 items', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const { data } = responseJson;\r",
+							"\r",
+							"    pm.expect(data).to.haveOwnProperty('books');\r",
+							"    pm.expect(data.books).to.be.an('array');\r",
+							"    pm.expect(data.books).to.lengthOf(3);\r",
+							"});\r",
+							"\r",
+							"pm.test('the books should have contains only id, name, and publisher property', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const { data: { books } } = responseJson;\r",
+							"\r",
+							"    books.forEach((book) => {\r",
+							"        pm.expect(Object.keys(book)).to.lengthOf(3);\r",
+							"        pm.expect(book).to.haveOwnProperty('id');\r",
+							"        pm.expect(book).to.haveOwnProperty('name');\r",
+							"        pm.expect(book).to.haveOwnProperty('publisher');\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/books?finished=0",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books"
+					],
+					"query": [
+						{
+							"key": "finished",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "[Optional] Get All Unfinished Books",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/books?finished=0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"books"
+							],
+							"query": [
+								{
+									"key": "finished",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "f6497c0048604f78881a25799f21c0b8"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:38:53 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"books\": [\n            {\n                \"id\": \"ysLI2Gk7vrxToQ-N\",\n                \"name\": \"Buku A Revisi\",\n                \"publisher\": \"Dicoding\"\n            },\n            {\n                \"id\": \"GGIeH91etMYTKqJt\",\n                \"name\": \"Buku A Revisi\",\n                \"publisher\": \"Dicoding\"\n            },\n            {\n                \"id\": \"xQEp6QhcQduhEdyJ\",\n                \"name\": \"Buku A Revisi\",\n                \"publisher\": \"Dicoding\"\n            },\n            {\n                \"id\": \"WwhruIE262U_BDEy\",\n                \"name\": \"Buku A Revisi\",\n                \"publisher\": \"Dicoding\"\n            },\n            {\n                \"id\": \"19P8DsBVJQgU3_qL\",\n                \"name\": \"Buku A Revisi\",\n                \"publisher\": \"Dicoding\"\n            },\n            {\n                \"id\": \"F2JghaIN1F2QbbwP\",\n                \"name\": \"Kelas Dicoding\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"3sGmZUnymjv7s5nS\",\n                \"name\": \"Kelas Dicoding\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"foB0HgRzftucO7dc\",\n                \"name\": \"dicoding Jobs\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"LSSUmkgZmHyrCm9J\",\n                \"name\": \"Buku A\",\n                \"publisher\": \"Dicoding Indonesia\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "[Optional] Get All Books Contains \"Dicoding\" Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code should be 200', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body object should have correct property and value', () => {\r",
+							"    const responsJson = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responsJson).to.haveOwnProperty('status');\r",
+							"    pm.expect(responsJson).to.haveOwnProperty('data');\r",
+							"\r",
+							"    pm.expect(responsJson.status).to.equals('success');\r",
+							"    pm.expect(responsJson.data).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body data object should have a array books and contains 2 items', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const { data } = responseJson;\r",
+							"\r",
+							"    pm.expect(data).to.haveOwnProperty('books');\r",
+							"    pm.expect(data.books).to.be.an('array');\r",
+							"    pm.expect(data.books).to.lengthOf(2);\r",
+							"});\r",
+							"\r",
+							"pm.test('the books should have contains only id, name, and publisher property', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const { data: { books } } = responseJson;\r",
+							"\r",
+							"    books.forEach((book) => {\r",
+							"        pm.expect(Object.keys(book)).to.lengthOf(3);\r",
+							"        pm.expect(book).to.haveOwnProperty('id');\r",
+							"        pm.expect(book).to.haveOwnProperty('name');\r",
+							"        pm.expect(book).to.haveOwnProperty('publisher');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"const deleteAllNotes = () => {\r",
+							"    pm.sendRequest(`http://localhost:${pm.environment.get('port')}/books`, (error, response) => {\r",
+							"        const responseJson = response.json();\r",
+							"        const { data: { books } } = responseJson;\r",
+							"        books.forEach(({ id }) => {\r",
+							"            const deleteRequest = {\r",
+							"                url: `http://localhost:${pm.environment.get('port')}/books/${id}`,\r",
+							"                method: 'DELETE',\r",
+							"            };\r",
+							"            pm.sendRequest(deleteRequest, (error, response) => {\r",
+							"                if(error) {\r",
+							"                    console.log(`Failed to delete book ${id}`)\r",
+							"                    return;\r",
+							"                }\r",
+							"                console.log(`Book ${id} deleted`);\r",
+							"            });\r",
+							"        });\r",
+							"    });\r",
+							"};\r",
+							"\r",
+							"deleteAllNotes();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/books?name=Dicoding",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Dicoding"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "[Optional] Get All Books Contains \"Dicoding\" Name",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/books?name=Dicoding",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"books"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Dicoding"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Vary",
+							"value": "origin"
+						},
+						{
+							"key": "access-control-expose-headers",
+							"value": "WWW-Authenticate,Server-Authorization"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "8547936b2e1e4ff3d0f2ec2ede3d9194;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 03 Jan 2024 10:39:02 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"books\": [\n            {\n                \"id\": \"F2JghaIN1F2QbbwP\",\n                \"name\": \"Kelas Dicoding\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"3sGmZUnymjv7s5nS\",\n                \"name\": \"Kelas Dicoding\",\n                \"publisher\": \"Dicoding Indonesia\"\n            },\n            {\n                \"id\": \"foB0HgRzftucO7dc\",\n                \"name\": \"dicoding Jobs\",\n                \"publisher\": \"Dicoding Indonesia\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"",
+					""
+				]
+			}
+		}
+	]
+}
